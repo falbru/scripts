@@ -16,7 +16,7 @@ kak -clear
 if [ "$(git rev-parse --show-toplevel 2> /dev/null)" ]; then
     git_dir=$(basename "$(git rev-parse --show-toplevel | tr -d '.')")
 
-    if ! kak -l | grep "$git_dir"; then
+    if ! kak -l | grep -E "^$git_dir\$"; then
         setsid kak -d -s "$git_dir" &
         wait_for_session "$git_dir"
     fi
